@@ -80,7 +80,9 @@ main > section.hero {
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
-  /* make this banner stick to the top! */
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
 }
 
 section.hero > .call-to-action {
@@ -105,7 +107,15 @@ main article {
 
 main p {
   line-height: 1.75;
-  margin-bottom: 48px;;
+  margin-bottom: 48px;
+}
+
+h1 + p::first-letter {
+  font-family: serif;
+  font-size: 500%;
+  float: left;
+  line-height: 0.9;
+  margin-right: 20px;
 }
 
 main > article img {
@@ -125,31 +135,44 @@ footer {
   color: var(--off-white);
 }
 
-/* tooltip code below */
-
-span.tooltip {
-  color: var(--danger-color);
+.tooltip {
   position: relative;
   cursor: pointer;
+  display: inline-block;
+  color: var(--danger-color);
 }
 
-/* underline span on hover/focus */
-span.tooltip:hover,
-span.tooltip:focus {
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: darkcyan;
+  color: #fff;
+  text-align: left;
+  padding: 10px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -100px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip:hover,
+.tooltip:focus {
   text-decoration: underline;
 }
-/* show tooltip on hover/focus */
-span.tooltip:hover > span,
-span.tooltip:focus > span {
-  display: inline;
-}
 
-/* styling for tooltip bubble */
-span.tooltip span {
-  display: none;
-}
-
-/* styling for tooltip bubble arrow */
-span.tooltip span::after {
-  content: "";
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: darkcyan transparent transparent transparent;
 }
